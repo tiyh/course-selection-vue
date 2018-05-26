@@ -39,6 +39,7 @@
     import alertTip from '../../components/common/alertTip'
     import {localapi, proapi, imgBaseUrl} from 'src/config/env'
     import {mapState, mapMutations} from 'vuex'
+    import {setStore} from '../../config/mUtils'
 
     export default {
         data(){
@@ -108,7 +109,8 @@
                 var loginInfo = new Object();
                 loginInfo.token = token;
                 loginInfo.username = this.userAccount;
-                this.RECORD_USERINFO(info);
+                this.RECORD_USERINFO(loginInfo);
+                setStore('token', token);
                 this.$router.go(-1);
             },
             closeTip(){
