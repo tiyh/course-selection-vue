@@ -7,14 +7,14 @@
                 <polyline points="12,18 4,9 12,0" style="fill:none;stroke:rgb(255,255,255);stroke-width:2"/>
             </svg>
         </section>
-        <router-link :to="userInfo? '/profile':'/login'" v-if='signinUp' class="head_login">
-            <svg class="user_avatar" v-if="userInfo">
+        <router-link :to="studentInfo? '/profile':'/login'" v-if='signinUp' class="head_login">
+            <svg class="user_avatar" v-if="studentInfo">
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#user"></use>
             </svg>
             <span class="login_span" v-else>登录 |</span>
         </router-link>
         <router-link :to="'/register'" v-if='signinUp' class="head_register">
-            <svg class="user_avatar" v-if="userInfo">
+            <svg class="user_avatar" v-if="studentInfo">
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#user"></use>
             </svg>
             <span class="register_span" v-else>注册</span>
@@ -24,18 +24,25 @@
 
 <script>
     import {mapState, mapActions} from 'vuex'
+    import {setStore, getStore} from '../../config/mUtils'
+    import {getStudentById} from '../../service/getData'
     export default {
     	data(){
             return{
-
+                studentInfo:null
             }
         },
         mounted(){
-            //获取用户信息
-            this.getUserInfo();
-
+            getStudentById(getStore("user_id")).then(res => {
+                if(res&&(!res.status))
+                    {
+                        this.studentInfo =res;
+                        console.log("getStudentById resultjson:"+this.studentInfo);
+                }
+            })
         },
-        props: ['signinUp', 'headTitle', 'goBack'],
+        
+        props: ['signinUp', 'goBack'],
         computed: {
             ...mapState([
                 'userInfo'

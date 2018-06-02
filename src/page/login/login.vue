@@ -104,13 +104,11 @@
                     //}),
                     body:formdata
                 });
-                let token = await fetchresult.json();
-                console.log("token:"+token);
-                var loginInfo = new Object();
-                loginInfo.token = token;
-                loginInfo.username = this.userAccount;
-                this.RECORD_USERINFO(loginInfo);
-                setStore('token', token);
+                let userInfo = await fetchresult.json();
+                console.log("token:"+JSON.stringify(userInfo));
+                this.RECORD_USERINFO(userInfo);
+                setStore('user_id', userInfo.user_id);
+                setStore('token', userInfo.token);
                 this.$router.go(-1);
             },
             closeTip(){

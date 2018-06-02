@@ -3,6 +3,7 @@ import App from '../App'
 const home = r => require.ensure([], () => r(require('../page/home/home')), 'home')
 const login = r => require.ensure([], () => r(require('../page/login/login')), 'login')
 const register = r => require.ensure([], () => r(require('../page/register/register')), 'register')
+const profile = r => require.ensure([], () => r(require('../page/profile/profile')), 'profile')
 
 
 
@@ -27,6 +28,10 @@ export default [{
         {
             path: '/register',
             component: register
+        },
+        {
+            path: '/profile',
+            component: profile
         },
     ]
 }]

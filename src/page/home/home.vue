@@ -3,8 +3,14 @@
         <head-top signin-up='home'>
             <span slot='logo' class="head_logo"  @click="reload">CourseSelectionSystem</span>
         </head-top>
-        <!--<p class="token" v-if="getToken()">token:{{getToken()}}</p>-->
-        <p class="courselist" v-if="courselist">courselist:{{this.courselist}}</p>
+        <!--<p class="courselist" v-if="courselist">courselist:{{this.courselist}}</p>-->
+        <p class="courselist" v-if="courselist">
+            <li v-for="item in courselist">
+                {{ item.name }}:
+                    capacity:{{item.capacity}}  orderedNum:{{item.orderedNum}}
+            </li>
+        </p>
+
     </div>
 </template>
 
@@ -12,21 +18,20 @@
 import headTop from '../../components/header/head'
 import {mapState, mapMutations} from 'vuex'
 import {setStore, getStore} from '../../config/mUtils'
+import {listCourses} from '../../service/getData'
 export default {
     data(){
         return{
-            studentInfo:null,
             courselist:null
         }
     },
     computed: {
-    //...mapState([
-    //           'userInfo',
-    //        ]),
     },
 
 	mounted(){
-        this.listCourses();
+        listCourses().then(res => {
+            this.courselist = res;
+        })
     },
 
     components:{
@@ -34,22 +39,27 @@ export default {
     },
 
     methods:{
-        //点击图标刷新页面
         reload(){
             window.location.reload();
         },
-        async getStudentById(){
-            if(this.userInfo){
-                let fetchresult = await fetch('/student/1',{
+        /*async getStudentById(id){
+            console.log("getStudentById user_id:"+id);
+            if(id){
+                let fetchresult = await fetch('/student/'+id,{
                     method:"GET",
                     mode:'cors',
                     headers: new Headers({
-                    'Authorization':this.userInfo.token,
+                    'Authorization':"Bearer "+
+                    getStore("token"),
                     //'Content-Type':'multipart/form-data'//Could not parse multipart servlet request;
                     }),
                 });
-                this.studentInfo = await fetchresult.text();//.json();
-                console.log("resultjson:"+studentInfo);
+                let student = await fetchresult.json();
+                if(student&&(!student.status))
+                {
+                    this.studentInfo =student;
+                    console.log("getStudentById resultjson:"+this.studentInfo);
+                }
             }
         },
         async listCourses(){
@@ -58,11 +68,8 @@ export default {
                     mode:'no-cors',
                 });
                 this.courselist = await fetchresult.json();
-                console.log("resultjson:"+this.courselist);
-        },
-        getToken(){
-            return getStore("token");
-        }
+                console.log("listCourses resultjson:"+JSON.stringify(this.courselist));
+        }*/
     },
 }
 
