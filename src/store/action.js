@@ -1,6 +1,11 @@
 import {
-	GET_USERINFO,
-	SAVE_ADDRESS
+	getStudentById
+} from '../service/getData'
+import {
+	getStore
+} from '../config/mUtils'
+import {
+	GET_USERINFO
 } from './mutation-types.js'
 
 export default {
@@ -9,7 +14,11 @@ export default {
 		commit,
 		state
 	}) {
-		//todo
-		//commit(GET_USERINFO, res)//todo
+		getStudentById(getStore("user_id")).then(res => {
+                if(res&&(!res.status))
+                    {
+                        commit(GET_USERINFO, res)
+                }
+            });
 	},
 }

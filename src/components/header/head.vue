@@ -7,14 +7,14 @@
                 <polyline points="12,18 4,9 12,0" style="fill:none;stroke:rgb(255,255,255);stroke-width:2"/>
             </svg>
         </section>
-        <router-link :to="studentInfo? '/profile':'/login'" v-if='signinUp' class="head_login">
-            <svg class="user_avatar" v-if="studentInfo">
+        <router-link :to="userInfo? '/profile':'/login'" v-if='signinUp' class="head_login">
+            <svg class="user_avatar" v-if="userInfo">
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#user"></use>
             </svg>
             <span class="login_span" v-else>登录 |</span>
         </router-link>
         <router-link :to="'/register'" v-if='signinUp' class="head_register">
-            <svg class="user_avatar" v-if="studentInfo">
+            <svg class="user_avatar" v-if="userInfo">
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#user"></use>
             </svg>
             <span class="register_span" v-else>注册</span>
@@ -29,19 +29,19 @@
     export default {
     	data(){
             return{
-                studentInfo:null
             }
         },
         mounted(){
-            getStudentById(getStore("user_id")).then(res => {
+            /*getStudentById(getStore("user_id")).then(res => {
                 if(res&&(!res.status))
                     {
                         this.studentInfo =res;
                         console.log("getStudentById resultjson:"+this.studentInfo);
                 }
-            })
+            })*/
+            this.getUserInfo();
         },
-        
+
         props: ['signinUp', 'goBack'],
         computed: {
             ...mapState([
