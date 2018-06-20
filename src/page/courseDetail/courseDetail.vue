@@ -12,22 +12,22 @@
         <p class="chooseCourse" v-if="course!=null && course.orderedNum < course.capacity" @click="tryChooseCourse()">
             chooseCourse
         </p>
-        <p class="chooseResult"v-if="showResult">
-            chooseResult:{{chooseResult}}
-        </p>
+        <alert-tip v-if="showAlert" :showHide="showAlert" @closeTip="closeTip" :alertText="alertText"></alert-tip>
     </div>
 </template>
 
 <script>
 import headTop from '../../components/header/head'
+import alertTip from '../../components/common/alertTip'
 import {mapState, mapActions} from 'vuex'
 import {getCourseById,chooseCourse} from '../../service/getData'
 export default {
     data(){
         return{
-            showResult :false,
             course:null,
-            chooseResult:false
+            chooseResult:false,
+            showAlert: false,
+            alertText: null
         }
     },
 
@@ -36,7 +36,8 @@ export default {
     },
 
     components:{
-        headTop
+        headTop,
+        alertTip
     },
     computed: {
         ...mapState([
@@ -57,8 +58,17 @@ export default {
         },
         async tryChooseCourse(){
             this.chooseResult= await chooseCourse(this.userInfo.id,this.course.id);
-            if(this.chooseResult) this.course.orderedNum++;
-            this.showResult=true;
+            if (this.chooseResult) {
+                this.course.orderedNum++;
+                this.showAlert = true;
+                this.alertText = 'choose success';
+            }else{
+                this.showAlert = true;
+                this.alertText = 'choose fail';
+            }
+        },
+        closeTip(){
+            this.showAlert = false;
         }
     },
 }
