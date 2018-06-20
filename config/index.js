@@ -26,7 +26,8 @@ module.exports = {
         context: [ //代理路径
             '/student',
             '/login',
-            '/courses'
+            '/courses',
+            '/course'
         ],
         proxypath: 'http://127.0.0.1:8001',
         // CSS Sourcemaps off by default because relative paths are "buggy"

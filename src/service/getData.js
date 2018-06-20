@@ -18,3 +18,31 @@ export const getStudentById=(id) => {
             }),
         });
 }
+
+export const getCourseById=(id) => {
+    console.log("getCourseById user_id:"+id);
+    if(!id) return null;
+    return fetch('/course/'+id,{
+            method:"GET",
+            mode:'cors',
+            headers: new Headers({
+            'Authorization':"Bearer "+
+            getStore("token"),
+            //'Content-Type':'multipart/form-data'//Could not parse multipart servlet request;
+            }),
+        });
+}
+
+export const chooseCourse=(studentID,courseID) => {
+    console.log("chooseCourse user_id:"+studentID+"course id:"+courseID);
+    if(!studentID||!courseID) return null;
+    return fetch('/students/'+studentID+'/selections/'+courseID,{
+            method:"GET",
+            mode:'cors',
+            headers: new Headers({
+            'Authorization':"Bearer "+
+            getStore("token"),
+            //'Content-Type':'multipart/form-data'//Could not parse multipart servlet request;
+            }),
+        });
+}

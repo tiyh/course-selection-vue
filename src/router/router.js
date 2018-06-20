@@ -4,6 +4,7 @@ const home = r => require.ensure([], () => r(require('../page/home/home')), 'hom
 const login = r => require.ensure([], () => r(require('../page/login/login')), 'login')
 const register = r => require.ensure([], () => r(require('../page/register/register')), 'register')
 const profile = r => require.ensure([], () => r(require('../page/profile/profile')), 'profile')
+const courseDetail = r => require.ensure([], () => r(require('../page/courseDetail/courseDetail')), 'courseDetail')
 
 
 
@@ -32,6 +33,11 @@ export default [{
         {
             path: '/profile',
             component: profile
+        },
+        {
+            name: 'courseDetail',
+            path: '/courseDetail/:courseId',
+            component: courseDetail
         },
     ]
 }]

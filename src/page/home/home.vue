@@ -5,7 +5,7 @@
         </head-top>
         <!--<p class="courselist" v-if="courselist">courselist:{{this.courselist}}</p>-->
         <p class="courselist" v-if="courselist">
-            <li v-for="item in courselist">
+            <li v-for="item in courselist" @click="toCourseDetail(item)">
                 {{ item.name }}:
                     capacity:{{item.capacity}}  orderedNum:{{item.orderedNum}}
             </li>
@@ -41,6 +41,10 @@ export default {
     methods:{
         reload(){
             window.location.reload();
+        },
+        toCourseDetail(courseItem){
+            //this.$router.push({ name: 'courseDetail', params: { courseItem: courseItem }})
+            this.$router.push({ path: '/courseDetail/'+courseItem.id })
         },
         /*async getStudentById(id){
             console.log("getStudentById user_id:"+id);
