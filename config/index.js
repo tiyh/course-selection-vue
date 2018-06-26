@@ -27,7 +27,8 @@ module.exports = {
             '/student',
             '/login',
             '/courses',
-            '/course'
+            '/course',
+            '/search'
         ],
         proxypath: 'http://127.0.0.1:8001',
         // CSS Sourcemaps off by default because relative paths are "buggy"

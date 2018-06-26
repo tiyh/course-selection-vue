@@ -5,6 +5,12 @@ export const listCourses = ()=> fetch('/courses',{
     mode:'no-cors',
 });
 
+export const searchCourse = (searchValue)=> fetch('/search/course',{
+    coursename:searchValue,
+    method:"GET",
+    mode:'no-cors',
+});
+
 export const getStudentById=(id) => {
     console.log("getStudentById user_id:"+id);
     if(!id) return null;
