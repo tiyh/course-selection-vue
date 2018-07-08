@@ -1,5 +1,5 @@
 <template>
-  	<div>
+  	<div class="home_page">
         <head-top signin-up='home'>
             <span slot='logo' class="head_logo"  @click="reload">CourseSelectionSystem</span>
         </head-top>
@@ -105,3 +105,42 @@ export default {
 }
 
 </script>
+<style lang="scss" scoped>
+    .home_page{
+        padding-top: 2.95rem;
+        margin-bottom: 2rem;
+    }
+    .search_form{
+        background-color: #fff;
+        padding: 0.5rem;
+        display: flex;
+        input{
+            height: 1.5rem;
+        }
+        .search_input{
+            flex: 4;
+            font-size: 0.65rem;
+            color: #333;
+            border-radius: 0.125rem;
+            background-color: #f2f2f2;
+            font-weight: bold;
+            padding: 0 0.25rem;
+        }
+        .search_submit{
+            flex: 1;
+            margin-left: .2rem;
+            font-size: 0.65rem;
+            color: #fff;
+            border-radius: 0.125rem;
+            font-weight: bold;
+            padding: 0 0.25rem;
+        }
+    }
+    .search_none{
+        margin: 0 auto;
+        color: #333;
+        background-color: #fff;
+        text-align: center;
+        margin-top: 0.125rem;
+    }
+</style>
