@@ -5,7 +5,7 @@
         </head-top>
         <form class="search_form">
             <input type="search" name="search" placeholder="请输入课程名称" class="search_input" v-model="searchValue" @input="checkInput">
-            <input type="submit" name="submit" class="search_submit" @click.prevent="searchTarget('')">
+            <input type="submit" name="submit" class="search_submit" @click.prevent="searchTarget()">
         </form>
 
 
@@ -54,12 +54,7 @@ export default {
             //this.$router.push({ name: 'courseDetail', params: { courseItem: courseItem }})
             this.$router.push({ path: '/courseDetail/'+courseItem.id })
         },
-        async searchTarget(value){
-            if (!value) {
-                this.searchValue = value;
-            }else{
-                return ;
-            }
+        async searchTarget(){
             console.log("searchCourse searchValue:"+this.searchValue);
             searchCourse(this.searchValue).then(res => {
                 if(res==null||res.length==0) this.emptyResult=true;
