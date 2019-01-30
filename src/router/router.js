@@ -7,8 +7,6 @@ const profile = r => require.ensure([], () => r(require('../page/profile/profile
 const courseDetail = r => require.ensure([], () => r(require('../page/courseDetail/courseDetail')), 'courseDetail')
 
 
-
-
 export default [{
     path: '/',
     component: App, //顶层路由，对应index.html
@@ -32,11 +30,17 @@ export default [{
         },
         {
             path: '/profile',
+            meta: {
+                requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录的
+            },
             component: profile
         },
         {
             name: 'courseDetail',
             path: '/courseDetail/:courseId',
+            meta: {
+                requireAuth: true,
+            },
             component: courseDetail
         },
     ]
